@@ -9,6 +9,7 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -33,5 +34,8 @@ public interface ToodooService {
 
     @PUT("todo/{id}")
     Completable updateTodoItem(@Path("id") int id, @Body TodoItemUpdate item);
+
+    @DELETE("todo/{id}")
+    Completable deleteTodoItem(@Path("id") int id);
 
 }

@@ -51,6 +51,14 @@ public class TodoItemHolder extends RecyclerView.ViewHolder implements HomeContr
                 listener.itemCompleted(getAdapterPosition(), completedView.isChecked());
             }
         });
+
+        this.container.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.itemLongClicked(getAdapterPosition());
+                return true;
+            }
+        });
     }
 
     @Override

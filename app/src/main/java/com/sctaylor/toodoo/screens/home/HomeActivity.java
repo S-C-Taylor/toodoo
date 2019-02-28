@@ -1,5 +1,9 @@
 package com.sctaylor.toodoo.screens.home;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -28,6 +32,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
 
     @BindView(R.id.recyclerViewTodoItems)
     RecyclerView todoItems;
+
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     Picasso picasso;
@@ -79,6 +86,14 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
         todoItemAdapter.notifyDataSetChanged();
 
         presenter.loadTodoItems();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                presenter.loadTodoItems();
+            }
+        });
     }
 
     @Override
@@ -97,12 +112,43 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
     }
 
     @Override
+    public void itemLongClicked(final int position) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(
+                HomeActivity.this);
+        alert.setTitle("Delete Item");
+        alert.setMessage("Are you sure to delete this item?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do your work here
+                presenter.deleteItem(position);
+                dialog.dismiss();
+
+            }
+        });
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+    }
+
+    @Override
     public void showProgress() {
         hudLoader.show();
     }
 
     @Override
     public void hideProgress() {
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
         hudLoader.dismiss();
     }
 }

@@ -9,12 +9,13 @@ import com.sctaylor.toodoo.models.TodoItem;
 
 public interface HomeContract {
 
-    interface UserPresenter {
+    interface HomePresenter {
         int getTodoCount();
         void setTodoItem(HomeContract.TodoItemHolder holder, int position);
         TodoItem getTodoItem(int position);
         void loadTodoItems();
         void completeItem(int position, boolean completed);
+        void deleteItem(int position);
     }
 
     interface HomeView {
