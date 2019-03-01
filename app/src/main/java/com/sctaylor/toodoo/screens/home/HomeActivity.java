@@ -3,12 +3,14 @@ package com.sctaylor.toodoo.screens.home;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.sctaylor.toodoo.R;
@@ -20,6 +22,7 @@ import com.sctaylor.toodoo.screens.home.core.TodoItemListener;
 import com.sctaylor.toodoo.screens.home.dagger.components.DaggerHomeActivityComponent;
 import com.sctaylor.toodoo.screens.home.dagger.components.HomeActivityComponent;
 import com.sctaylor.toodoo.screens.home.dagger.modules.HomeActivityModule;
+import com.sctaylor.toodoo.screens.tododetails.TodoDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -35,6 +38,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
 
     @BindView(R.id.swipe_container)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.button_create)
+    FloatingActionButton buttonCreate;
 
     @Inject
     Picasso picasso;
@@ -94,6 +100,13 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
                 presenter.loadTodoItems();
             }
         });
+
+        buttonCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.createItem();
+            }
+        });
     }
 
     @Override
@@ -103,7 +116,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
 
     @Override
     public void itemClicked(int position) {
-
+        presenter.selectItem(position);
     }
 
     @Override
@@ -121,7 +134,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //do your work here
                 presenter.deleteItem(position);
                 dialog.dismiss();
 
@@ -137,6 +149,11 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Home
         });
 
         alert.show();
+    }
+
+    @Override
+    public void showDetailsForItem() {
+        startActivity(TodoDetailsActivity.newIntent(this));
     }
 
     @Override

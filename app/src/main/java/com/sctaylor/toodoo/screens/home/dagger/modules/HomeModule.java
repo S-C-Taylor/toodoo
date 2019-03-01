@@ -1,6 +1,8 @@
 package com.sctaylor.toodoo.screens.home.dagger.modules;
 
+import com.sctaylor.toodoo.application.central.RxBus;
 import com.sctaylor.toodoo.application.network.ToodooService;
+import com.sctaylor.toodoo.application.repository.PreferencesRepository;
 import com.sctaylor.toodoo.screens.home.HomeActivity;
 import com.sctaylor.toodoo.screens.home.core.HomeContract;
 import com.sctaylor.toodoo.screens.home.core.TodoItemAdapter;
@@ -20,8 +22,8 @@ public class HomeModule {
 
     @HomeActivityScope
     @Provides
-    public HomePresenter provideHomePresenter(HomeContract.HomeView view, ToodooService service) {
-        return new HomePresenter(view, service);
+    public HomePresenter provideHomePresenter(HomeContract.HomeView view, ToodooService service, PreferencesRepository preferencesRepository, RxBus rxBus) {
+        return new HomePresenter(view, service, preferencesRepository, rxBus);
     }
 
     @HomeActivityScope

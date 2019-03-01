@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.home.HomeActivity">
+    tools:context=".screens.tododetails.TodoDetailsActivity">
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -13,7 +14,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/swipe_container"
+        android:layout_gravity="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,54 +26,56 @@
             tools:layout_editor_absoluteY="9dp">
 
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/textViewSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Toodoo List"
+                android:layout_marginEnd="32dp"
+                android:text="SAVE"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"/>
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipe_container"
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Enter Title"
+        android:inputType="textPersonName"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/editTextDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewTodoItems"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:src="@drawable/plus"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="Enter a description"
+        android:inputType="textMultiLine"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
 </android.support.constraint.ConstraintLayout>

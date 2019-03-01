@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TooDoo</string>
+    <string name="current_item">current_item</string>
+    <string name="PREFS_ID">PREFS_ID</string>
 </resources>

@@ -2,6 +2,8 @@ package com.sctaylor.toodoo.application.dagger.modules;
 
 import android.content.Context;
 
+import com.sctaylor.toodoo.application.dagger.scopes.ToodooApplicationScope;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +26,7 @@ import timber.log.Timber;
 public class NetworkModule {
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache, Interceptor networkInterceptor){
 
         return new OkHttpClient.Builder()
@@ -35,7 +37,7 @@ public class NetworkModule {
     }
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public HttpLoggingInterceptor loggingInterceptor(){
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -50,7 +52,7 @@ public class NetworkModule {
     }
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public Interceptor networkInterceptor(){
         return new Interceptor() {
             @Override
@@ -72,13 +74,13 @@ public class NetworkModule {
     }
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public Cache cache(File cacheFile){
         return new Cache(cacheFile, 10 * 1000 * 1000); //10mb cache
     }
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public File cacheFile(Context context){
         return new File(context.getCacheDir(), "okhttp_cache");
     }

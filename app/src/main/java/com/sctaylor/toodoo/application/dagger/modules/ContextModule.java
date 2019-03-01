@@ -2,6 +2,8 @@ package com.sctaylor.toodoo.application.dagger.modules;
 
 import android.content.Context;
 
+import com.sctaylor.toodoo.application.dagger.scopes.ToodooApplicationScope;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -18,7 +20,7 @@ public class ContextModule {
     }
 
     @Provides
-    @com.sctaylor.example.application.dagger.scopes.ToodooApplicationScope
+    @ToodooApplicationScope
     public Context context(){
         return this.context;
     }

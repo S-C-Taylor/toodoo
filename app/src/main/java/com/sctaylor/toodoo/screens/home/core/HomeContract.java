@@ -16,12 +16,15 @@ public interface HomeContract {
         void loadTodoItems();
         void completeItem(int position, boolean completed);
         void deleteItem(int position);
+        void selectItem(int position);
+        void createItem();
     }
 
     interface HomeView {
         void showProgress();
         void hideProgress();
         void updateTodoList();
+        void showDetailsForItem();
     }
 
     interface TodoItemHolder {

@@ -1,4 +1,4 @@
-package com.sctaylor.example.application.dagger.scopes;
+package com.sctaylor.toodoo.application.dagger.scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

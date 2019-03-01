@@ -7,7 +7,7 @@ public class TodoItem {
 
     @SerializedName("itemId")
     @Expose
-    private int id;
+    private int id = -1;
     @SerializedName("title")
     @Expose
     private String title;
